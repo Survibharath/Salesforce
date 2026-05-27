@@ -1,0 +1,31 @@
+name: Salesforce Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Salesforce CLI
+        run: |
+          npm install -g @salesforce/cli
+
+      - name: Verify Salesforce CLI
+        run: sf --version
+
+      - name: Authenticate Salesforce Org
+        run: |
+          echo "${{ secrets.SFDX_AUTH_URL }}" > auth.txt
+          sf org login sfdx-url --sfdx-url-file auth.txt --alias targetOrg
+
+      - name: Deploy Metadata
+        run: |
+          sf project deploy start --target-org targetOrg
