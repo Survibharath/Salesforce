@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Block_Production_Deploy_Without_Approval</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+Deployed_To_Production__c = TRUE,
+OR(
+NOT(ISPICKVAL(Approval_Status__c , &quot;Approved&quot;)),
+Deployed_To_Sandbox__c = FALSE
+)
+)</errorConditionFormula>
+    <errorMessage>Production deployment allowed only after sandbox testing and approval.</errorMessage>
+</ValidationRule>

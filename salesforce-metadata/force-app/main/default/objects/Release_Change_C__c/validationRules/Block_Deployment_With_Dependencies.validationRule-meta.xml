@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Block_Deployment_With_Dependencies</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISPICKVAL(Deployment_Status__c, &quot;Ready for Deployment&quot;),
+Dependency_check__c = TRUE
+)</errorConditionFormula>
+    <errorMessage>Cannot mark Ready for Deployment while dependencies exist.</errorMessage>
+</ValidationRule>
