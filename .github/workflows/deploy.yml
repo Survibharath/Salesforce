@@ -28,5 +28,4 @@ jobs:
 
       - name: Deploy Metadata
         run: |
-          cd salesforce-metadata
           sf project deploy start --target-org targetOrg
